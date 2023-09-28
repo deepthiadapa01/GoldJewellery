@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburger Menu Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            padding: 15px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .navbar .menu-icon {
+            display: none;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar a:not(:first-child) {display: none;}
+            .navbar a.icon {
+                float: right;
+                display: block;
+            }
+            .navbar.responsive {position: relative;}
+            .navbar.responsive .menu-icon {
+                display: block;
+                position: absolute;
+                right: 15px;
+                top: 15px;
+            }
+            .navbar.responsive a {
+                display: block;
+                text-align: center;
+                width: 100%;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar" id="navbar">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
+        &#9776;
+    </a>
+</div>
+
+<script>
+function toggleMenu() {
+    var navbar = document.getElementById("navbar");
+    if (navbar.className === "navbar") {
+        navbar.className += " responsive";
+    } else {
+        navbar.className = "navbar";
+    }
+}
+</script>
+
+</body>
+</html>

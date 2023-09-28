@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Page</title>
+    <style>
+	        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #9a0056;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        nav {
+            background-color: #9a0056;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav li {
+            margin: 0 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #fff;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .column {
+            flex: 0 0 30%;
+            margin: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .column img {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .detail-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .detail-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+
+        .side-panel {
+            width: 250px;
+            height: 100%;
+            background: #f4f4f4;
+            position: absolute;
+            top: 0;
+            right: 0;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .side-panel img {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<header>
+        <h1>ADAPA JEWELLERS</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<h1>Products</h1>
+
+<div class="container">
+    <div class="column" onclick="showDetail('Necklace', 'product1.jpg')">
+        <img src="img/product1.jpg" alt="Necklace images">
+        <p>Necklaces</p>
+    </div>
+	
+    <!-- Add more columns as needed -->
+</div>
+
+<!--
+<div class="detail-view" id="detailView">
+    <div class="detail-content" onClick="hideDetail()">
+        <h2 id="productName"></h2>
+        <img id="productImage" src="" alt="">
+    </div>
+    <div class="side-panel">
+        <h3>Related Products</h3>
+        <img src="related1.jpg" alt="Related Product 1">
+        <img src="related2.jpg" alt="Related Product 2">
+        <!-- Add more related products as needed -->
+<!--	
+	<button onClick="hideDetail()">esc</button>
+    </div>
+-->
+	
+</div>
+
+<script>
+
+
+function showDetail(name, imageSrc) {
+    var detailView = document.getElementById("detailView");
+    var productName = document.getElementById("productName");
+    var productImage = document.getElementById("productImage");
+
+    productName.textContent = name;
+    productImage.src = imageSrc;
+
+    detailView.style.display = "flex";
+}
+
+function hideDetail() {
+    var detailView = document.getElementById("detailView");
+    detailView.style.display = "none";
+}
+
+var urlParams = new URLSearchParams(window.location.search);
+var receivedData = urlParams.get('data');
+console.log(receivedData);
+
+
+	var jewelleryJson =[
+
+	{
+		"id": 1,
+		"name": "Necklace",
+		"image": "img/product1",
+		"weight": "36 grms"
+	},
+	{
+		"id": 2,
+		"name": "Necklace",
+		"image": "img/product2",
+		"weight": "47 grms"
+	},
+	{
+		"id": 3,
+		"name": "Necklace",
+		"image": "img/product3",
+		"weight": "80 grms"
+	}
+];
+
+for (var i = 0; i < jewelleryJson.length; i++) {
+  var jewellery = jewelleryJson[i];
+  console.log("ID: " + jewellery.id);
+  console.log("Name: " + jewellery.name);
+  console.log("Image: " + jewellery.image);
+  if (jewellery.name == "Necklace") {
+  console.log("This is a necklace!");
+  // Add more code here if needed
+}
+}
+  
+</script>
+
+</body>
+</html>

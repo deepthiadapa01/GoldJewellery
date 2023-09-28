@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Image Example</title>
+	<style>
+	  .designDetails {
+    background-color: white; /* White background */
+    width: 75vw; /* 75% of viewport width */
+    max-width: 400px; /* Set a maximum width if needed */
+    padding: 100px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Make position relative for absolute positioning inside */
+	
+	
+  }
+  
+  .golden-text {
+    color: #FFD700;
+}
+
+  .close-button {
+    background-color: #007BFF; /* Blue color for the close button */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+   right: 10px;
+  }
+  
+   .overlay {
+    display: none;
+    position: fixed;
+    top: 75px;
+    left: 100px;
+    width: 75%;
+    height: 75%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+  }
+
+	body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav li {
+            margin: 0 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #fff;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+	
+	</style>
+</head>
+<body>
+<header>
+        <h1>ADAPA JEWELLERS</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+<!--<div id="imageContainer"></div>-->
+
+<table id="myTable" cellspacing="10px" cellpadding="10px">
+  <!-- Table headers will be added dynamically -->
+</table>
+<div class="overlay" id="details" style="display:none">
+<div id="designDetails">
+<button class="close-button" onclick="closePopup()">Close</button>
+<table>
+<tr>
+<td id="image"></td>
+<td>
+<table>
+  <tr>
+    <td colspan="2" class="golden-text"><h1><i>Design Description</i></h1></td>
+  </tr>
+  <tr>
+    <td><h3><label class="golden-text">Product :</label></h3></td>
+    <td><h3 id="product" class="golden-text"></h3></td>
+  </tr>
+  <tr>
+    <td><h3 class="golden-text"><label>Weight :</label></h3></td>
+    <td><h3 id="weight" class="golden-text"></h3></td>
+  </tr>
+  <tr>
+    <td><h3 class="golden-text"><label>Cost :</label></h3></td>
+    <td><h3 id="cost" class="golden-text"></h3></td>
+  </tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<script>
+
+// Identify the table element
+var table = document.getElementById("myTable");
+
+
+// Sample data
+	var data =[
+
+	{
+		"id": 1,
+		"name": "Necklace",
+		"image": "img/product1.jpg",
+		"modelname":"",
+		"weight": "36 grms",
+		"w" :36
+	},
+	{
+		"id": 2,
+		"name": "Necklace",
+		"image": "img/product2.jpg",
+		"modelname":"",
+		"weight": "47 grms",
+		"w" :47
+	},
+	{
+		"id": 3,
+		"name": "Necklace",
+		"image": "img/product3.jpg",
+		"modelname":"",
+		"weight": "89 grms",
+		"w" :89
+	},
+	{
+		"id": 4,
+		"name": "Necklace",
+		"image": "img/product4.jpg",
+		"modelname":"",
+		"weight": "90 grms",
+		"w" :90
+	},
+	{
+		"id": 5,
+		"name": "Necklace",
+		"image": "img/product5.jpg",
+		"modelname":"",
+		"weight": "30 grms",
+		"w" :30
+	},
+	{
+		"id": 6,
+		"name": "Necklace",
+		"image": "img/product6.jpg",
+		"modelname":"",
+		"weight": "80 grms",
+		"w" :80
+	},
+	{
+		"id": 7,
+		"name": "Chain",
+		"image": "img/product7.jpg",
+		"modelname":"",
+		"weight": "10 grms",
+		"w" :10
+	},
+	{
+		"id": 8,
+		"name": "Chain",
+		"image": "img/product8.jpg",
+		"modelname":"",
+		"weight": "14 grms",
+		"w" :14
+	},
+	{
+		"id": 9,
+		"name": "Chain",
+		"image": "img/product9.jpg",
+		"modelname":"",
+		"weight": "8 grms",
+		"w" :8
+	},
+	{
+		"id": 10,
+		"name": "Chain",
+		"image": "img/product10.jpg",
+		"modelname":"",
+		"weight": "15 grms",
+		"w" :15
+	},
+	{
+		"id": 11,
+		"name": "Chain",
+		"image": "img/product11.jpg",
+		"modelname":"",
+		"weight": "18 grms",
+		"w" :18
+	},
+	{
+		"id": 12,
+		"name": "Chain",
+		"image": "img/product12.jpg",
+		"modelname":"",
+		"weight": "16 grms",
+		"w" :16
+	},
+	{
+		"id": 13,
+		"name": "Ring",
+		"image": "img/product13.jpg",
+		"modelname":"",
+		"weight": "5 grms",
+		"w" :5
+	},
+	{
+		"id": 14,
+		"name": "Ring",
+		"image": "img/product14.jpg",
+		"modelname":"",
+		"weight": "7 grms",
+		"w" :7
+	},
+	{
+		"id": 15,
+		"name": "Ring",
+		"image": "img/product15.jpg",
+		"modelname":"",
+		"weight": "6 grms",
+		"w" :6
+	},
+	{
+		"id": 16,
+		"name": "Ring",
+		"image": "img/product16.jpg",
+		"modelname":"",
+		"weight": "7 grms",
+		"w" :7
+	},
+	{
+		"id": 17,
+		"name": "Ring",
+		"image": "img/product17.jpg",
+		"modelname":"",
+		"weight": "8 grms",
+		"w" :8
+	},
+	{
+		"id": 18,
+		"name": "Ring",
+		"image": "img/product18.jpg",
+		"modelname":"",
+		"weight": "6 grms",
+		"w" :6
+	},
+	{
+		"id": 19,
+		"name": "Bracelet",
+		"image": "img/product19.jpg",
+		"modelname":"",
+		"weight": "12 grms",
+		"w" :12
+	},
+	{
+		"id": 20,
+		"name": "Bracelet",
+		"image": "img/product20.jpg",
+		"modelname":"",
+		"weight": "7 grms",
+		"w" :7
+	},
+	{
+		"id": 21,
+		"name": "Bracelet",
+		"image": "img/product21.jpg",
+		"modelname":"",
+		"weight": "6 grms",
+		"w" :6
+	},
+	{
+		"id": 22,
+		"name": "Bracelet",
+		"image": "img/product22.jpg",
+		"modelname":"",
+		"weight": "8 grms",
+		"w" :8
+	},
+	{
+		"id": 23,
+		"name": "Bracelet",
+		"image": "img/product23.jpg",
+		"modelname":"",
+		"weight": "3 grms",
+		"w" :3
+	},
+	{
+		"id": 24,
+		"name": "Bracelet",
+		"image": "img/product24.jpg",
+		"modelname":"",
+		"weight": "6 grms",
+		"w" :6
+	},
+		{
+		"id": 25,
+		"name": "EarRing",
+		"image": "img/product25.jpg",
+		"modelname":"",
+		"weight": "20 grms",
+		"w" :20
+	},
+	{
+		"id": 26,
+		"name": "EarRing",
+		"image": "img/product26.jpg",
+		"modelname":"",
+		"weight": "26 grms",
+		"w" :26
+	},
+	{
+		"id": 27,
+		"name": "EarRing",
+		"image": "img/product27.jpg",
+		"modelname":"",
+		"weight": "56 grms",
+		"w" :56
+	},
+	{
+		"id": 28,
+		"name": "EarRing",
+		"image": "img/product28.jpg",
+		"modelname":"",
+		"weight": "28 grms",
+		"w" :28
+	},
+	{
+		"id": 29,
+		"name": "EarRing",
+		"image": "img/product29.jpg",
+		"modelname":"",
+		"weight": "30 grms",
+		"w" :30
+	},
+	{
+		"id": 30,
+		"name": "EarRing",
+		"image": "img/product30.jpg",
+		"modelname":"",
+		"weight": "12 grms",
+		"w" :12
+	},
+	{
+		"id": 31,
+		"name": "Pendant",
+		"image": "img/product31.jpg",
+		"modelname":"",
+		"weight": "20 grms",
+		"w" :20
+	},
+	{
+		"id": 32,
+		"name": "Pendant",
+		"image": "img/product32.jpg",
+		"modelname":"",
+		"weight": "6 grms",
+		"w" :6
+	},
+	{
+		"id": 33,
+		"name": "Pendant",
+		"image": "img/product33.jpg",
+		"modelname":"",
+		"weight": "5 grms",
+		"w" :5
+	},
+	{
+		"id": 34,
+		"name": "Pendant",
+		"image": "img/product34.jpg",
+		"modelname":"",
+		"weight": "7 grms",
+		"w" :7
+	},
+	{
+		"id": 35,
+		"name": "Pendant",
+		"image": "img/product35.jpg",
+		"modelname":"",
+		"weight": "3 grms",
+		"w" :3
+	},
+	{
+		"id": 36,
+		"name": "Pendant",
+		"image": "img/product36.jpg",
+		"modelname":"",
+		"weight": "12 grms",
+		"w" :12
+	}
+	
+	
+	
+];
+ 
+function cellClickHandler(designDetails) {
+	openPopup();
+  console.log(designDetails.name,designDetails.weight);
+}
+
+function costCalculator(weight)
+{
+	return weight*54;
+}
+
+ function openPopup() {
+      document.getElementById('details').style.display = 'flex'; 
+    }
+
+    function closePopup() {
+      document.getElementById('details').style.display = 'none';
+    }
+
+
+// Iterate over the data and insert it into the table
+var i=0;
+while( i < data.length) {
+	 var jewellery = data[i];
+	console.log(jewellery);
+	var urlParams = new URLSearchParams(window.location.search);
+	var receivedData = urlParams.get('data');
+	console.log(receivedData);
+	if(jewellery.name==receivedData){ 
+  var row = table.insertRow(); 
+  for (var j = 0; j < 3; j++) {
+    var cell = row.insertCell(j);
+    var jewellery = data[i];
+	//console.log(jewellery);
+	//var urlParams = new URLSearchParams(window.location.search);
+	//var receivedData = urlParams.get('data');
+	//console.log(receivedData);
+	if(jewellery.name==receivedData){
+	
+	var imageURL = jewellery.image; 
+// Create a new image element
+	var imgElement = document.createElement('img');
+
+// Set the src attribute to the URL of the image
+	imgElement.src = imageURL;
+
+	// Set any additional attributes or styles if needed
+	imgElement.alt = 'My Image';
+	imgElement.style.width = '300px';
+	image.style.height = '200px';
+    image.style.objectFit = 'cover';
+    image.style.margin = '10px';
+	cell.appendChild(imgElement);
+	
+	
+	
+	  (function (jewellery) {
+        cell.addEventListener("click", function () {
+          cellClickHandler(jewellery);
+         // console.log("cell clicked");
+		  var cost=costCalculator(jewellery.w);
+		//  console.log(cost);
+		  document.getElementById("product").innerHTML = jewellery.name;
+			document.getElementById("weight").innerHTML = jewellery.weight;
+
+		document.getElementById("cost").innerHTML = cost+" USD";
+		var imgElement = document.createElement('img');
+        imgElement.src = jewellery.image;
+        imgElement.alt = 'Design Image';
+        imgElement.style.width = '80%'; // Adjust the width as needed
+        document.getElementById("image").innerHTML = ''; // Clear any existing content
+        document.getElementById("image").appendChild(imgElement);
+  
+        });
+      })(jewellery);
+	
+	}
+	
+	i=i+1;
+	}
+  }
+  else{
+  i=i+1;}
+}
+
+
+
+</script>
+
+</body>
+</html>
